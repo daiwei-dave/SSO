@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://D://SSODemo/SSODemo.iml" filepath="D://SSODemo/SSODemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SSO_same_domain/SSO_same_domain.iml" filepath="$PROJECT_DIR$/SSO_same_domain/SSO_same_domain.iml" />
+    </modules>
+  </component>
+</project>
