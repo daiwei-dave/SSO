@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SSO_same_domain" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sso-server" charset="UTF-8" />
   </component>
 </project>

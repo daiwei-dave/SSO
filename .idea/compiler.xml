@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="sso-server" />
         <module name="SSO_same_domain" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="sso-server" target="1.8" />
       <module name="SSO_same_domain" target="1.5" />
       <module name="SSODemo" target="1.5" />
     </bytecodeTargetLevel>

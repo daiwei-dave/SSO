@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/SSODemo.iml" filepath="$PROJECT_DIR$/SSODemo.iml" />
       <module fileurl="file://D://SSODemo/SSODemo.iml" filepath="D://SSODemo/SSODemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/SSO_same_domain/SSO_same_domain.iml" filepath="$PROJECT_DIR$/SSO_same_domain/SSO_same_domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sso-server/sso-server.iml" filepath="$PROJECT_DIR$/sso-server/sso-server.iml" />
     </modules>
   </component>
 </project>
