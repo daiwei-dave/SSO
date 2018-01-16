@@ -8,17 +8,24 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.gitee.common.constants.ErrorCode;
+import com.gitee.common.entity.ResultData;
+
+import com.sheefee.simple.sso.server.constant.AuthConst;
+import com.sheefee.simple.sso.server.domain.User;
+import com.sheefee.simple.sso.server.storage.SessionStorage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sheefee.simple.sso.client.constant.AuthConst;
-import com.sheefee.simple.sso.client.domain.User;
-import com.sheefee.simple.sso.client.storage.SessionStorage;
-import com.sheefee.simple.sso.client.util.HTTPUtil;
+
+
+
 import com.sheefee.simple.sso.server.service.UserService;
 import com.sheefee.simple.sso.server.storage.ClientStorage;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 登录和注销控制器
@@ -42,16 +49,17 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping("/login")
-	public String login(HttpServletRequest request, User input, Model model) {
+	@ResponseBody
+	public ResultData login(HttpServletRequest request, User input, Model model) {
 		// 验证用户
 		User user = userService.find(input);
 		if (user == null) {
-			model.addAttribute("error", "username or password is wrong.");
-			return "redirect:/";
+			return ResultData.newResultData(ErrorCode.FAILOR,"用户登录失败");
 		}
 
 		// 授权
 		String token = UUID.randomUUID().toString();
+		user.setToken(token);
 		request.getSession().setAttribute(AuthConst.IS_LOGIN, true);
 		request.getSession().setAttribute(AuthConst.TOKEN, token);
 		
@@ -63,10 +71,9 @@ public class LoginController {
 		if (clientUrl != null && !"".equals(clientUrl)) {
 			// 存储，用于注销
 			ClientStorage.INSTANCE.set(token, clientUrl);
-			return "redirect:" + clientUrl + "?" + AuthConst.TOKEN + "=" + token;
+			return ResultData.newSuccessResultData();
 		}
-
-		return "redirect:/";
+		return ResultData.newResultData(ErrorCode.SUCCESS,ErrorCode.SUCCESS_MSG,user);
 	}
 
 	/**
@@ -98,10 +105,9 @@ public class LoginController {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put(AuthConst.LOGOUT_REQUEST, token);
 			for (String url : list) {
-				HTTPUtil.post(url, params);
+//				HTTPUtil.post(url, params);
 			}
 		}
-		
 		return "redirect:/";
 	}
 }

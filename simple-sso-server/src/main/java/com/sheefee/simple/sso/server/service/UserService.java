@@ -1,6 +1,7 @@
 package com.sheefee.simple.sso.server.service;
 
-import com.sheefee.simple.sso.client.domain.User;
+
+import com.sheefee.simple.sso.server.domain.User;
 
 public interface UserService {
 	/**

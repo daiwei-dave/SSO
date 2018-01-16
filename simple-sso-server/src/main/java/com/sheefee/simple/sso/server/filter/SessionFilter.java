@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sheefee.simple.sso.client.constant.AuthConst;
+import com.sheefee.simple.sso.server.constant.AuthConst;
 import com.sheefee.simple.sso.server.storage.ClientStorage;
 
 /**
@@ -23,16 +23,36 @@ import com.sheefee.simple.sso.server.storage.ClientStorage;
 public class SessionFilter implements Filter{
 	public void destroy() {}
 
+	/**
+	 * 拦截未登录的请求
+	 * <P>
+	 *     1.访问首页，放行
+	 * </P>
+	 *
+	 * @param req
+	 * @param res
+	 * @param chain
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 		HttpSession session = request.getSession();
 		String uri = request.getRequestURI();
-		
+		//访问首页，放行
+		if ("/".equals(uri)){
+			chain.doFilter(req, res);
+			return;
+		}
+
 		// 注销请求，放行
 		if ("/logout".equals(uri)) {
 			chain.doFilter(req, res);
 			return;
+		}
+		if ("/checkToken".equals(uri)){
+			return ;
 		}
 		
 		// 已经登录，放行
@@ -54,13 +74,13 @@ public class SessionFilter implements Filter{
 			return;
 		}
 		// 登录请求，放行
-		if ("/".equals(uri) || "/login".equals(uri)) {
+		if ("/login".equals(uri)) {
 			chain.doFilter(req, res);
 			return;
 		}
 		
 		// 其他请求，拦截
-		response.sendRedirect("/");
+//		response.sendRedirect("/");
 	}
 
 	public void init(FilterConfig config) throws ServletException {}

@@ -1,4 +1,4 @@
-package com.sheefee.simple.sso.client.domain;
+package com.sheefee.simple.sso.server.domain;
 
 import java.util.Date;
 

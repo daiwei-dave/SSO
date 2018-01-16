@@ -9,7 +9,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>simple-sso-server</artifactId>
-	<packaging>war</packaging>
+
 	<name>simple-sso-server</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
@@ -34,11 +34,6 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.sheefee</groupId>
-			<artifactId>simple-sso-client</artifactId>
-			<version>${parent.version}</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -62,6 +57,12 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.gitee.daiwei-dave</groupId>
+			<artifactId>basic-commons</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sheefee.simple.sso.server.dao.UserDao">
-	<resultMap id="resultMap" type="com.sheefee.simple.sso.client.domain.User">
+	<resultMap id="resultMap" type="com.sheefee.simple.sso.server.domain.User">
 		<result property="id" column="id" />
 		<result property="username" column="username" />
 		<result property="password" column="password" />

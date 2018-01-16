@@ -15,7 +15,8 @@ public enum SessionStorage {
 	
 	public HttpSession get(String token) {
 		if (map.containsKey(token)) {
-			return map.remove(token);
+//			return map.remove(token);
+			return  map.get(token);
 		}
 		return null;
 	}

@@ -2,11 +2,11 @@ package com.sheefee.simple.sso.server.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.sheefee.simple.sso.server.constant.AuthConst;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sheefee.simple.sso.client.constant.AuthConst;
 
 /**
  * 认证中心页面显示控制器

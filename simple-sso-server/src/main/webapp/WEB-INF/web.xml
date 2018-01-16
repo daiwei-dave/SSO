@@ -5,6 +5,10 @@
 	version="2.5">
 	<display-name>simple-sso-server</display-name>
 
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
 	<filter>
 		<filter-name>SessionFilter</filter-name>
 		<filter-class>com.sheefee.simple.sso.server.filter.SessionFilter</filter-class>
@@ -27,4 +31,5 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
 </web-app>
