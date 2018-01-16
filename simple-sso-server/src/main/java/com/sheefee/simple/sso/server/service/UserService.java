@@ -13,4 +13,7 @@ public interface UserService {
 	 * @return User
 	 */
 	public User find(User user);
+
+
+	User findByToken(String token);
 }

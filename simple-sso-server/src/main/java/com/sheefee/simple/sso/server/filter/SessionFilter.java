@@ -76,7 +76,6 @@ public class SessionFilter implements Filter{
 		// 登录请求，放行
 		if ("/login".equals(uri)) {
 			chain.doFilter(req, res);
-			return;
 		}
 		
 		// 其他请求，拦截

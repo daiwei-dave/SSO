@@ -15,6 +15,7 @@ import com.sheefee.simple.sso.server.constant.AuthConst;
 import com.sheefee.simple.sso.server.domain.User;
 import com.sheefee.simple.sso.server.storage.SessionStorage;
 
+import com.sheefee.simple.sso.server.storage.TokenStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class LoginController {
 	@Autowired
-	private UserService userService;
+	UserService userService;
 	
 	/**
 	 * 登录
@@ -65,6 +66,7 @@ public class LoginController {
 		
 		// 存储，用于注销
 		SessionStorage.INSTANCE.set(token, request.getSession());
+		TokenStorage.getInstance().set(token, request.getSession());
 
 		// 子系统跳转过来的登录请求，授权、存储后，跳转回去
 		String clientUrl = request.getParameter(AuthConst.CLIENT_URL);

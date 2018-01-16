@@ -30,4 +30,11 @@ public class UserServiceImpl implements UserService {
 //		return new User("1","sheefee","123456");
 		return userDao.find(user, table, userid, username, password);
 	}
+
+	public User findByToken(String token) {
+		return new User("1","sheefee","123456");
+//		return userDao.findByToken(token);
+	}
+
+
 }

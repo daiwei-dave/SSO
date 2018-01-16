@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 public enum SessionStorage {
 	INSTANCE;
-	private Map<String, HttpSession> map = new HashMap<String, HttpSession>();
+	private static Map<String, HttpSession> map = new HashMap<String, HttpSession>();
 	
 	public void set(String token, HttpSession session) {
 		map.put(token, session);

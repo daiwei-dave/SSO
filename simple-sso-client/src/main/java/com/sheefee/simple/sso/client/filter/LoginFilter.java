@@ -56,12 +56,12 @@ public class LoginFilter implements Filter {
 		// 已经登录，放行
 		if (session.getAttribute(AuthConst.IS_LOGIN) != null) {
 			chain.doFilter(req, res);
+			return;
 		}
 		// 从认证中心回跳的带有token的请求，有效则放行
 		String token = request.getParameter(AuthConst.TOKEN);
 		if (token != null) {
-			session.setAttribute(AuthConst.IS_LOGIN, true);
-			session.setAttribute(AuthConst.TOKEN, token);
+
 
 			//todo 存储，用于注销
 
@@ -72,12 +72,15 @@ public class LoginFilter implements Filter {
 //				return;
 //			}
 //			SessionStorage.INSTANCE.set(token, session);
-			ResultData resultData = TokenUtil.checkToken(request);
+			ResultData resultData = new TokenUtil().checkToken(request);
 			//todo 认证失败返回给客户端
 			if (!ResultData.isSuccess(resultData)){
 				return ;
 			}
+			session.setAttribute(AuthConst.IS_LOGIN, true);
+			session.setAttribute(AuthConst.TOKEN, token);
 			chain.doFilter(req, res);
+			return;
 		}
 
 		// 重定向至登录页面，并附带当前请求地址

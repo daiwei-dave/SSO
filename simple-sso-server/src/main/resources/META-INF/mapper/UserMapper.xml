@@ -17,5 +17,15 @@
 		WHERE ${username} = #{user.username} AND ${password} = #{user.password}
 		LIMIT 1
 	</select>
+
+
+	<update id="updateUser" parameterType="java.util.Map">
+		update ${table} set
+		token=#{user.username}
+		WHERE ${username} = #{user.username} AND ${password} = #{user.password}
+	</update>
+
+
+
 	
 </mapper>
