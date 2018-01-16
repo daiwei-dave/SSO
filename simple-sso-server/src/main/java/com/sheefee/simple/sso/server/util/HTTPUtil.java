@@ -1,11 +1,4 @@
-package com.sheefee.simple.sso.client.util;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+package com.sheefee.simple.sso.server.util;
 
 import org.apache.http.Consts;
 import org.apache.http.NameValuePair;
@@ -15,6 +8,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class HTTPUtil {
 	/**

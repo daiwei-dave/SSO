@@ -64,6 +64,12 @@
 			<groupId>com.gitee.daiwei-dave</groupId>
 			<artifactId>basic-commons</artifactId>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>simple-sso-server</finalName>

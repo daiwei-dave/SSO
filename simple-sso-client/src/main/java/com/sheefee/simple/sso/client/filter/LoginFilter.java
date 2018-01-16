@@ -61,17 +61,6 @@ public class LoginFilter implements Filter {
 		// 从认证中心回跳的带有token的请求，有效则放行
 		String token = request.getParameter(AuthConst.TOKEN);
 		if (token != null) {
-
-
-			//todo 存储，用于注销
-
-
-
-//			HttpSession httpSession = SessionStorage.INSTANCE.get(token);
-//			if (httpSession==null){
-//				return;
-//			}
-//			SessionStorage.INSTANCE.set(token, session);
 			ResultData resultData = new TokenUtil().checkToken(request);
 			//todo 认证失败返回给客户端
 			if (!ResultData.isSuccess(resultData)){
@@ -84,7 +73,8 @@ public class LoginFilter implements Filter {
 		}
 
 		// 重定向至登录页面，并附带当前请求地址
-		response.sendRedirect(config.getInitParameter(AuthConst.LOGIN_URL));
+		request.getRequestDispatcher(config.getInitParameter(AuthConst.LOGIN_URL)).forward(request,response);
+	//	response.sendRedirect(config.getInitParameter(AuthConst.LOGIN_URL));
 	}
 
 

@@ -1,11 +1,13 @@
 package com.sheefee.simple.sso.server.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.gitee.common.constants.ErrorCode;
@@ -16,6 +18,7 @@ import com.sheefee.simple.sso.server.domain.User;
 import com.sheefee.simple.sso.server.storage.SessionStorage;
 
 import com.sheefee.simple.sso.server.storage.TokenStorage;
+import com.sheefee.simple.sso.server.util.HTTPUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,12 +49,11 @@ public class LoginController {
 	 * @author sheefee
 	 * @date 2017年9月12日 下午2:09:24
 	 * @param request
-	 * @param model
 	 * @return
 	 */
 	@RequestMapping("/login")
 	@ResponseBody
-	public ResultData login(HttpServletRequest request, User input, Model model) {
+	public ResultData login(HttpServletRequest request, User input, HttpServletResponse response) {
 		// 验证用户
 		User user = userService.find(input);
 		if (user == null) {
@@ -69,11 +71,21 @@ public class LoginController {
 		TokenStorage.getInstance().set(token, request.getSession());
 
 		// 子系统跳转过来的登录请求，授权、存储后，跳转回去
-		String clientUrl = request.getParameter(AuthConst.CLIENT_URL);
+//		String clientUrl = request.getParameter(AuthConst.CLIENT_URL);
+		//todo clientUrl从客户端获取
+
+
+		String clientUrl = "http://localhost:8084/index.jsp";
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("token",token);
+		final boolean post = HTTPUtil.post(clientUrl, params);
+		if (!post){
+			return ResultData.newResultData(ErrorCode.FAILOR,"向客户端发送token失败！");
+		}
 		if (clientUrl != null && !"".equals(clientUrl)) {
 			// 存储，用于注销
 			ClientStorage.INSTANCE.set(token, clientUrl);
-			return ResultData.newSuccessResultData();
+			return ResultData.newResultData(ErrorCode.SUCCESS,ErrorCode.SUCCESS_MSG,user);
 		}
 		return ResultData.newResultData(ErrorCode.SUCCESS,ErrorCode.SUCCESS_MSG,user);
 	}
